@@ -19,6 +19,7 @@ const fs = require("fs")
 const util = require('util')
 const fetch = require('node-fetch')
 const os = require('os')
+const canvas = require("canvacord")
 const crypto = require('crypto')
 const imageToBase64 = require('image-to-base64')
 const axios = require('axios')
@@ -36,25 +37,26 @@ const toMs = require('ms')
 const path = require('path')
 const cd = 4.32e+7
 const { ind } = require('./language')
+const { removeBackgroundFromImageFile } = require('remove.bg')
 
 /********** MENU SETTING **********/
 const vcard = 'BEGIN:VCARD\n' 
             + 'VERSION:2.0\n' 
-            + 'FN:𝕸𝖗.𝕻𝖆𝖙𝖔⚜️🦆⁩⁩\n' 
-            + 'ORG:𝕸𝖗.𝕻𝖆𝖙𝖔⚜️🦆⁩;\n' 
-            + 'TEL;type=CELL;type=VOICE;waid=17693039223+1 (769) 303-9223n' 
+            + 'FN:AIDEN⚜️🦆⁩⁩\n' 
+            + 'ORG:AIDEN⚜️🦆⁩;\n' 
+            + 'TEL;type=CELL;type=VOICE;waid=595986460945 +595 986 460945n' 
             + 'END:VCARD' 
 blocked = []   
-prefix = '#'
+prefix = '/'
 limitawal = 30
-memberlimit = 0
+memberlimit = 25
 ator = 'SUBSCRIBE'
-namo = 'Mr.Pato'
-cr = '𝕸𝖗.𝕻𝖆𝖙𝖔 -𝕭𝖔𝖙⚜️🦆⁩⁩'
+namo = 'Aiden'
+cr = 'Changelog: Nuevo menu⁩⁩'
 /*************************************/
 
 /******** OWNER NUMBER**********/
-const ownerNumber = ["5213317595519@s.whatsapp.net","5213317595519@s.whatsapp.net"] 
+const ownerNumber = ["595986460945@s.whatsapp.net"] 
 /************************************/
 
        
@@ -288,46 +290,6 @@ function kyun(seconds){
   return `${pad(hours)} Jam ${pad(minutes)} Menit ${pad(seconds)} Detik`
 }
 
-function addMetadata(packname, author) {	
-	if (!packname) packname = 'WABot'; if (!author) author = 'Bot';	
-	author = author.replace(/[^a-zA-Z0-9]/g, '');	
-	let name = `${author}_${packname}`
-	if (fs.existsSync(`./${name}.exif`)) return `./${name}.exif`
-	const json = {	
-		"sticker-pack-name": packname,
-		"sticker-pack-publisher": author,
-	}
-	const littleEndian = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00])	
-	const bytes = [0x00, 0x00, 0x16, 0x00, 0x00, 0x00]	
-
-	let len = JSON.stringify(json).length	
-	let last	
-
-	if (len > 256) {	
-		len = len - 256	
-		bytes.unshift(0x01)	
-	} else {	
-		bytes.unshift(0x00)	
-	}	
-
-	if (len < 16) {	
-		last = len.toString(16)	
-		last = "0" + len	
-	} else {	
-		last = len.toString(16)	
-	}	
-
-	const buf2 = Buffer.from(last, "hex")	
-	const buf3 = Buffer.from(bytes)	
-	const buf4 = Buffer.from(JSON.stringify(json))	
-
-	const buffer = Buffer.concat([littleEndian, buf2, buf3, buf4])	
-
-	fs.writeFile(`./${name}.exif`, buffer, (err) => {	
-		return `./${name}.exif`	
-	})	
-
-} 
 
 /********** FUNCTION ***************/
 
@@ -405,6 +367,7 @@ client.on('group-participants-update', async (anu) => {
 			const args = body.trim().split(/ +/).slice(1)
 			const isCmd = body.startsWith(prefix)
 			const tescuk = ["0@s.whatsapp.net"]
+			const stats = ["status@broadcast"]
 			const isGroup = from.endsWith('@g.us')
 			const q = args.join(' ')
 			const botNumber = client.user.jid
@@ -452,6 +415,61 @@ client.on('group-participants-update', async (anu) => {
 			const costumimg = ( pesan , tipe, target , caption) => {
 			client.sendMessage(from, pesan , tipe , {quoted: { key: { fromMe: false, participant: `${target}`, ...(from ? { remoteJid: from } : {}) }, message: {"imageMessage":{url: 'https://mmg.whatsapp.net/d/f/Ahj0ACnTjSHHm6-HjqAUBYiCu2-85zMZp_-EhiXlsd6A.enc',mimetype: 'image/jpeg',caption: `${caption}`,fileSha256: '0Pk0qJyQFn9FCtslZrydJHRQDKryjYcdP7I3CmRrHRs=',fileLength: '20696',height: 360,width: 382,mediaKey: 'N43d/3GY7GYQpgBymb9qFY5O9iNDXuBirXsNZk+X61I=',fileEncSha256: 'IdFM58vy8URV+IUmOqAY3OZsvCN6Px8gaJlRCElqhd4=',directPath: '/v/t62.7118-24/35174026_475909656741093_8174708112574209693_n.enc?oh=2a690b130cf8f912a9ca35f366558743&oe=6061F0C6',mediaKeyTimestamp: '1614240917',jpegThumbnail: '/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABsbGxscGx4hIR4qLSgtKj04MzM4PV1CR0JHQl2NWGdYWGdYjX2Xe3N7l33gsJycsOD/2c7Z//////////////8BGxsbGxwbHiEhHiotKC0qPTgzMzg9XUJHQkdCXY1YZ1hYZ1iNfZd7c3uXfeCwnJyw4P/Zztn////////////////CABEIAEMASAMBIgACEQEDEQH/xAAwAAADAAMBAAAAAAAAAAAAAAAABAUBAwYCAQADAQEAAAAAAAAAAAAAAAABAgMABP/aAAwDAQACEAMQAAAAoy6kcWS2eH8miq17B553Thh1BgyTY9iULYfndGBmbSwNEV3eWXpjwZElG09WJckXCj8sWBVc1ZKXj2ZYaoWHnc67K3PbKwtZOqzLrzdQAg5fWFRUeCNTQG2pEKJ0wCD/xAAoEAACAgIBAQkAAwEAAAAAAAABAgADBBEScQUQEyEiMTJBYSNRYmP/2gAIAQEAAT8AaZzfEdwWcGMTE1jNv3M1ozDb+SD2jTO+Yigk6A3KqhseIdfkroTYbXQRrkVuJOplKEuOpjtpxF+IjTO+YnZoBvj4pa/msHtMnHZrgymZ6hCnSJsDl+ys7rTpGmevxMwLFS/1fcA7iNzPsDXaH1NccYH+2lJ1SnSNMlOdcbY6iYGa9g4OJzXW9zI7SBJrpjqxsA9zMkcMetf2V7NKD/McgAkxsis7EcA2fkxkqSkaYbMGRu3hr0x6q6ckufaUMpsexj0ma4Y0qDKhqlektyntXiQO4qWI0PONVZWNsNTmZwewekEwo1fpYaMZdvWf2DYrXoO/ARWLNL6VuXiYcSsuK9eXGYtHhM/nsTPVQgb7iDkydRCNBYYx1Ozj6nmSStRIgJ8UH/nMJiTZs/c7RPwExhu+vrH+p//EAB4RAAIBBAMBAAAAAAAAAAAAAAABAhAREjIhMDFC/9oACAECAQE/AOpJsxEqIj4TfNqXygIWpLc+ZEdBH//EAB4RAAICAgIDAAAAAAAAAAAAAAABAjEQETJBAxJx/9oACAEDAQE/AHWVeHQtYrDaNkno7GOzxP10xzWipDHZHidx+EuQz//Z',scansSidecar: 'choizTOCOFXo21QcOR/IlCehTFztHGnB3xo4F4d/kwmxSJJIbMmvxg==',scanLengths: [Array],midQualityFileSha256: '68OHK4IyhiKDNgNAZ3SoXsngzYENebQkV4b/RwhhYIY=',midQualityFileEncSha256: '2EYOLCXx+aqg9RyP6xJYChQNbEjXZmc0EcSwHzoyXx0='}}}})
 			}
+			let authorname = client.contacts[from] != undefined ? client.contacts[from].vname || client.contacts[from].notify : undefined	
+if (authorname != undefined) { } else { authorname = groupName }
+
+client.on('CB:action,,call', async json => {
+	const callerId = json[2][0][1].from;
+	console.log(`[WARN] ${callerId.split('@')[0]} is calling!`);
+	client.sendMessage(callerId, 'Ups... Te tengo que bloquear por molestar , La proxima piensa dos veces:)', text)
+	await client.blockUser(callerId, 'add')
+})
+
+function addMetadata(packname, author) {
+	const stickerf = createSerial(7)	
+	if (!packname) packname = 'Aiden'; if (!author) author = 'SimpBot';	
+	author = author.replace(/[^a-zA-Z0-9]/g, '');	
+	let name = stickerf
+	if (fs.existsSync(`./src/stickers/${name}.exif`)) return `./src/stickers/${name}.exif`
+	const json = {	
+		"sticker-pack-name": packname,
+		"sticker-pack-publisher": author,
+		"android-app-store-link": 'https:\/\/wa.link\/971ew7',
+		"ios-app-store-link": 'https:\/\/wa.link\/971ew7',
+	}
+	const littleEndian = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00])	
+	const bytes = [0x00, 0x00, 0x16, 0x00, 0x00, 0x00]	
+
+	let len = JSON.stringify(json).length	
+	let last	
+
+	if (len > 256) {	
+		len = len - 256	
+		bytes.unshift(0x01)	
+	} else {	
+		bytes.unshift(0x00)	
+	}	
+
+	if (len < 16) {	
+		last = len.toString(16)	
+		last = "0" + len	
+	} else {	
+		last = len.toString(16)	
+	}	
+
+	const buf2 = Buffer.from(last, "hex")	
+	const buf3 = Buffer.from(bytes)	
+	const buf4 = Buffer.from(JSON.stringify(json))	
+
+	const buffer = Buffer.concat([littleEndian, buf2, buf3, buf4])	
+
+	fs.writeFile(`./src/stickers/${name}.exif`, buffer, (err) => {	
+		return `./src/stickers/${name}.exif`	
+	})	
+
+	
+
+} 
 	        /*****************END SCURITY FEATURE ********/
 
 
@@ -536,7 +554,7 @@ client.on('group-participants-update', async (anu) => {
 				premi = '*✓*'
 			} 
 			if (isOwner) {
-				premi = '*owner*'
+				premi = '*Aiden*'
 			}
 				
 				
@@ -1029,8 +1047,8 @@ client.on('group-participants-update', async (anu) => {
                 const serialUser = createSerial(20)
                 if(isNaN(umurUser)) return await reply('La edad es número, no seas pendej*')
                 if (namaUser.length >= 30) return reply(`Tu nombre es muy largo es un nombre o un tren`)
-                if (umurUser > 99) return reply(`La edad maxima es 99 años`)
-                if (umurUser < 2) return reply(`la edad minima es 2 años`)
+                if (umurUser > 40) return reply(`La edad maxima es 40 años`)
+                if (umurUser < 7) return reply(`la edad minima es 7 años`)
                 try {
 					ppimg = await client.getProfilePicture(`${sender.split('@')[0]}@c.us`)
 				} catch {
@@ -1273,15 +1291,26 @@ client.on('group-participants-update', async (anu) => {
           		if (!isRegistered) return reply(ind.noregis())
            		 await client.sendMessage(from, `Ping\nSpeed: ${processTime(time, moment())} _Second_`)
 					break
-               case 'help': 
-				case 'menu':
-				if (!isRegistered) return reply(ind.noregis())
-				    const reqXp  = 5000 * (Math.pow(2, getLevelingLevel(sender)) - 1)
-				    const uangku = checkATMuser(sender)
-					//const anos = client.user.os_version
-					//const merek = clien
-					await costum(ind.menu(pushname, prefix, getLevelingLevel, getLevelingXp, sender, reqXp, _registered, uangku, role, premi, client, process,kyun), text, tescuk, cr)
-					break
+
+					case 'help': 
+					case 'menu':
+					if (!isRegistered) return reply(ind.noregis())
+						const reqXp2  = 5000 * (Math.pow(2, getLevelingLevel(sender)) - 1)
+						const uangku2 = checkATMuser(sender)
+						const formaterm = (seconds) => {
+							const pad = (s) => {
+								return (s < 10 ? '0' : '') + s
+							}
+							const hrs = Math.floor(seconds / (60 * 60))
+							const mins = Math.floor(seconds % (60 * 60) / 60)
+							const secs = Math.floor(seconds % 60)
+							return ' ' + pad(hrs) + ' Horas, ' + pad(mins) + ' Minutos, ' + pad(secs) + ' Segundos'
+						}
+						const uptimem = process.uptime()
+						//const anos = client.user.os_version
+						//const merek = clien
+						await costum(ind.menu2(formaterm, uptimem, pushname, prefix, getLevelingLevel, getLevelingXp, sender, reqXp2, _registered, uangku2, role, premi, client, process,kyun), text, tescuk, cr)
+						break
 				case 'info':
 					me = client.user
 					uptime = process.uptime()
@@ -1406,7 +1435,7 @@ client.on('group-participants-update', async (anu) => {
                 hasiltf = jumblah - fee
                 addKoinUser(tujuantf, hasiltf)
                 confirmATM(sender, jumblah)
-                addKoinUser('50373488366@s.whatsapp.net', fee)
+                addKoinUser('595986460945@s.whatsapp.net', fee)
                 reply(`*「 Hecho 」*\n\nremesas han tenido éxito\nDe : +${sender.split("@")[0]}\nPara : +${tujuan}\nimporte de transferencia : ${jumblah}\nImpuestos : ${fee}`)
                 break
 				case 'dompet':
@@ -1542,11 +1571,8 @@ client.on('group-participants-update', async (anu) => {
 					}
 					await limitAdd(sender)
 				break
-				case 's': 
 				case 'stiker':
-				case 'sticker': 
-				if (isLimit(sender)) return reply(ind.limitend(pusname))
-				await limitAdd(sender)
+				case 'sticker':
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						const media = await client.downloadAndSaveMediaMessage(encmedia)
@@ -1559,20 +1585,20 @@ client.on('group-participants-update', async (anu) => {
 							.on('error', function (err) {
 								console.log(`Error : ${err}`)
 								fs.unlinkSync(media)
-								reply(ind.stikga)
+								reply('Tengo errores al hacer tu sticker')
 							})
 							.on('end', function () {
 								console.log('Finish')
-								exec(`webpmux -set exif ${addMetadata(namo, ator)} ${ran} -o ${ran}`, async (error) => {
-									//if (error) {
-											// reply(ind.stikga())
-											// fs.unlinkSync(media)	
-											// fs.unlinkSync(ran)
-											// }
+								exec(`webpmux -set exif normal.exif ${ran} -o ${ran}`, async (error) => {
+									console.log(`Error : ${error}`)
+									if (error) return reply('Tengo errores al hacer tu sticker')
 									client.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
 									fs.unlinkSync(media)	
 									fs.unlinkSync(ran)	
 								})
+								/*client.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
+								fs.unlinkSync(media)
+								fs.unlinkSync(ran)*/
 							})
 							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
@@ -1581,7 +1607,7 @@ client.on('group-participants-update', async (anu) => {
 						const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						const media = await client.downloadAndSaveMediaMessage(encmedia)
 						ran = getRandom('.webp')
-						reply(ind.wait())
+						reply('Espera..')
 						await ffmpeg(`./${media}`)
 							.inputFormat(media.split('.')[1])
 							.on('start', function (cmd) {
@@ -1591,26 +1617,70 @@ client.on('group-participants-update', async (anu) => {
 								console.log(`Error : ${err}`)
 								fs.unlinkSync(media)
 								tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-								reply(`❌ Lo siento bro, no se pudo convertir  ${tipe} a sticker`)
+								reply(`❌ Gagal, pada saat mengkonversi ${tipe} ke stiker`)
 							})
 							.on('end', function () {
 								console.log('Finish')
-								exec(`webpmux -set exif ${addMetadata(namo, ator)} ${ran} -o ${ran}`, async (error) => {
-									//if (error) {
-											// reply(ind.stikga())
-											// fs.unlinkSync(media)	
-											// fs.unlinkSync(ran)
-											// }
+								exec(`webpmux -set exif gif.exif ${ran} -o ${ran}`, async (error) => {
+									if (error) return reply('Tengo errores al hacer tu sticker')
 									client.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
 									fs.unlinkSync(media)
 									fs.unlinkSync(ran)
 								})
+								/*client.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
+								fs.unlinkSync(media)
+								fs.unlinkSync(ran)*/
 							})
 							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
 							.save(ran)
+					} else if ((isMedia || isQuotedImage) && args[0] == 'nobg') {
+						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
+						const media = await client.downloadAndSaveMediaMessage(encmedia)
+						ranw = getRandom('.webp')
+						ranp = getRandom('.png')
+						reply('Espera..')
+						keyrmbg = 'bcAvZyjYAjKkp1cmK8ZgQvWH'
+						await removeBackgroundFromImageFile({path: media, apiKey: keyrmbg, size: 'auto', type: 'auto', ranp}).then(res => {
+							fs.unlinkSync(media)
+							let buffer = Buffer.from(res.base64img, 'base64')
+							fs.writeFileSync(ranp, buffer, (err) => {
+								if (err) return reply('Gagal, Terjadi kesalahan, silahkan coba beberapa saat lagi.')
+							})
+							exec(`ffmpeg -i ${ranp} -vcodec libwebp -filter:v fps=fps=20 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${ranw}`, (err) => {
+								fs.unlinkSync(ranp)
+								if (err) return reply('Tengo errores al hacer tu sticker')
+								exec(`webpmux -set exif ${addMetadata('AIDEN, SIMP BOT (Ver mas)', 'tipo: Sin Fondo')} ${ranw} -o ${ranw}`, async (error) => {
+									if (error) return reply('Tengo errores al hacer tu sticker')
+									client.sendMessage(from, fs.readFileSync(ranw), sticker, {quoted: mek})
+									fs.unlinkSync(ranw)
+								})
+								//client.sendMessage(from, fs.readFileSync(ranw), sticker, {quoted: mek})
+							})
+						})
+					/*} else if ((isMedia || isQuotedImage) && colors.includes(args[0])) {
+						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
+						const media = await client.downloadAndSaveMediaMessage(encmedia)
+						ran = getRandom('.webp')
+						await ffmpeg(`./${media}`)
+							.on('start', function (cmd) {
+								console.log('Started :', cmd)
+							})
+							.on('error', function (err) {
+								fs.unlinkSync(media)
+								console.log('Error :', err)
+							})
+							.on('end', function () {
+								console.log('Finish')
+								fs.unlinkSync(media)
+								client.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
+								fs.unlinkSync(ran)
+							})
+							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=${args[0]}@0.0, split [a][b]; [a] palettegen=reserve_transparent=off; [b][p] paletteuse`])
+							.toFormat('webp')
+							.save(ran)*/
 					} else {
-						reply(`Responde a una imagen o video o mandala con el comando ${prefix}sticker`)
+						reply(`Kirim gambar dengan caption ${prefix}sticker atau tag gambar yang sudah dikirim`)
 					}
 					break
 				case 'tts':
@@ -1641,6 +1711,42 @@ client.on('group-participants-update', async (anu) => {
 					anu = await simih(teks) 
 					reply(anu)
 				break 
+				case 'levelimg':
+					if (!isRegistered) return reply(ind.noregis())
+						if (!isGroup) return reply(ind.groupo())
+						const ppLink = await client.getProfilePicture(sender)
+						if (ppLink === undefined) {
+							var pepe = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+						} else {
+							pepe = ppLink
+						}
+						const userLeveli = getLevelingLevel(sender)
+						const userXpi = getLevelingXp(sender)
+						if (userLeveli === undefined && userXpi === undefined) return reply(ind.lvlnul())
+						const requiredXpi = 5000 * (Math.pow(2, userLeveli) - 1)
+						const ranq = new canvas.Rank()
+							.setAvatar(pepe)
+							.setLevel(userLeveli)
+							.setLevelColor('#ffa200', '#ffa200')
+							.setRank(Number(999))
+							.setCurrentXP(userXpi)
+							.setOverlay('#000000', 100, false)
+							.setRequiredXP(requiredXpi)
+							.setProgressBar('#ffa200', 'COLOR')
+							.setBackground('COLOR', '#000000')
+							.setUsername(pushname)
+							.setDiscriminator(sender.substring(6, 10))
+							ranq.build()
+							.then(async (buffer) => {
+								canvas.write(buffer, `${sender}_card.png`)
+								await client.sendMessage(from, fs.readFileSync(`${sender}_card.png`), MessageType.image, {quoted: mek})
+								fs.unlinkSync(`${sender}_card.png2`)
+							})
+							.catch(async (err) => {
+								console.error(err)
+								await reply(from, 'Error al crear la imagen de clasificación.', {quoted: mek})
+							})
+						break
 				case 'toimg':
 				if (!isRegistered) return reply(ind.noregis())
 				if (!isQuotedSticker) return reply('Responde a un sticker')
@@ -1652,7 +1758,7 @@ client.on('group-participants-update', async (anu) => {
 						fs.unlinkSync(media)
 						if (err) return reply(ind.stikga())
 						buffer = fs.readFileSync(ran)
-						client.sendMessage(from, buffer, image, {quoted: mek, caption: '𝕸𝖗.𝕻𝖆𝖙𝖔 -𝕭𝖔𝖙⚜️🦆⁩⁩'})
+						client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Aiden -𝕭𝖔𝖙⚜️🦆⁩⁩'})
 						fs.unlinkSync(ran)
 					})
 					await limitAdd(sender)
@@ -1717,7 +1823,7 @@ client.on('group-participants-update', async (anu) => {
                 if (userLevel === undefined && userXp === undefined) return reply(ind.lvlnul())
                 const requiredXp = 5000 * (Math.pow(2, userLevel) - 1)
                 resul = `┏━━❉ *LEVEL* ❉━━\n┣⊱ *Nombre* : ${pushname}\n┣⊱ Numero : wa.me/${sender.split("@")[0]}\n┣⊱ XP :  ${userXp}/${requiredXp}\n┣⊱ Nivel : ${userLevel}\n┗━━━━━━━━━━━━ 🌷♞  𝕤αт𝕒ⓝ  ☯🐺━━━━━`
-                costum(resul, text, tescuk, per)
+                costumimg(resul, text, tescuk, per)
 				break 
 				case 'mining':
                       if (!isRegistered) return reply(ind.noregis())
@@ -2331,6 +2437,20 @@ client.on('group-participants-update', async (anu) => {
 					buffer = fs.readFileSync(`./strg/image/${namastc}.jpeg`)
 					client.sendMessage(from, buffer, image, { quoted: mek, caption: `Result From Database : ${namastc}.jpeg` })
 					break
+					case 'random':
+						if (!isRegistered) return reply(ind.noregis())
+						members_id = []
+						teks = (args.length > 1) ? body.slice(8).trim() : ''
+						teks += '\n\n'
+						for (let mem of groupMembers) {
+							teks += `*#* @${mem.jid.split('@')[0]}\n`
+							members_id.push(mem.jid)
+						}
+						const randme = members_id[Math.floor(Math.random() * members_id.length)]
+						console.log(randme)
+						const random2 = 
+						await mentions(`╔✯〘 Te han seleccionado! 〙✯═ \n\n @${randme.split('@')[0]}\n\n═✯〘 Para: ${body.slice(8)} 〙✯═`, randme, true)
+					break				
 				case 'imagelist':
 				case 'listimage':
 				if (!isRegistered) return reply(ind.noregis())
@@ -2404,7 +2524,7 @@ client.on('group-participants-update', async (anu) => {
 						muehe = await simih(budy)
 						reply(ind.cmdnf(prefix, command))
 					} else {
-						console.log(color('[ERROR]','red'), 'Unregistered Command from', color(sender.split('@')[0]))
+						//console.log(color('[ERROR]','red'), 'Unregistered Command from', color(sender.split('@')[0]))
 					}
 					}
 		} catch (e) {

@@ -1,0 +1,79 @@
+
+> XBOT@1.0.0 start /home/rdteam080/V2Patowsp
+> node index
+
+[32mINFO[39m [2021-03-23 16:29:30.683 +0000] (26704): [36mloading authentication credentials from ./session.json[39m
+    class: "Baileys"
+[32mINFO[39m [2021-03-23 16:29:30.804 +0000] (26704): [36mconnected to WhatsApp Web server, authenticating via takeover[39m
+    class: "Baileys"
+credentials updated!
+[32mINFO[39m [2021-03-23 16:29:31.355 +0000] (26704): [36mvalidated connection successfully[39m
+    class: "Baileys"
+[32mINFO[39m [2021-03-23 16:29:31.460 +0000] (26704): [36mopened connection to WhatsApp Web[39m
+    class: "Baileys"
+[32mINFO[39m [2021-03-23 16:29:31.478 +0000] (26704): [36mreceived 10 chats[39m
+    class: "Baileys"
+[32mINFO[39m [2021-03-23 16:29:32.074 +0000] (26704): [36mreceived 713 contacts[39m
+    class: "Baileys"
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:29:33 [32mMessage[39m from [32m5492392625801[39m in [32m🎊🥳🕴Feliz cum martin🕴🥳🎊[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:29:33 [32mMessage[39m from [32m573136332436[39m in [32mTP Resurrection | Oficial[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:29:35 [32mMessage[39m from [32m595994588776[39m in [32mTP Resurrection | Oficial[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:29:35 [32mMessage[39m from [32m5491144340436[39m in [32mKAISER SEXO[39m args : [32m0[39m
+[32mINFO[39m [2021-03-23 16:29:36.043 +0000] (26704): [36mclosed connection, reason replaced[39m
+    class: "Baileys"
+
+> XBOT@1.0.0 start /home/rdteam080/V2Patowsp
+> node index
+
+[32mINFO[39m [2021-03-23 16:29:35.590 +0000] (26734): [36mloading authentication credentials from ./session.json[39m
+    class: "Baileys"
+[32mINFO[39m [2021-03-23 16:29:35.672 +0000] (26734): [36mconnected to WhatsApp Web server, authenticating via takeover[39m
+    class: "Baileys"
+credentials updated!
+[32mINFO[39m [2021-03-23 16:29:36.094 +0000] (26734): [36mvalidated connection successfully[39m
+    class: "Baileys"
+[32mINFO[39m [2021-03-23 16:29:36.098 +0000] (26734): [36mreceived 10 chats[39m
+    class: "Baileys"
+[32mINFO[39m [2021-03-23 16:29:36.189 +0000] (26734): [36mopened connection to WhatsApp Web[39m
+    class: "Baileys"
+[32mINFO[39m [2021-03-23 16:29:36.293 +0000] (26734): [36mreceived 713 contacts[39m
+    class: "Baileys"
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:29:37 [32mMessage[39m from [32m573136332436[39m in [32mTP Resurrection | Oficial[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:29:40 [32mMessage[39m from [32m50685913429[39m in [32mTP Resurrection | Oficial[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:29:43 [32mMessage[39m from [32m56939423671[39m in [32m🎊🥳🕴Feliz cum martin🕴🥳🎊[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:29:45 [32mMessage[39m from [32m50685913429[39m in [32mTP Resurrection | Oficial[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;32mEXEC[1;37m] 23/03 23:29:49 [32mmenu[39m from [32m18605798859[39m in [32mTP Resurrection | Oficial[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:29:49 [32mMessage[39m from [32m5491122789663[39m in [32mKAISER SEXO[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:29:55 [32mMessage[39m from [32m994409173970[39m in [32mKAISER SEXO[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:29:57 [32mMessage[39m from [32m51925745443[39m in [32mKAISER SEXO[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:30:00 [32mMessage[39m from [32m56976433763[39m in [32m🎊🥳🕴Feliz cum martin🕴🥳🎊[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:30:04 [32mMessage[39m from [32m51925745443[39m in [32mKAISER SEXO[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;32mEXEC[1;37m] 23/03 23:30:08 [32mmenu[39m from [32m595994588776[39m in [32mTP Resurrection | Oficial[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:30:10 [32mMessage[39m from [32m5491144340436[39m in [32mKAISER SEXO[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:30:11 [32mMessage[39m from [32m5491122789663[39m in [32mKAISER SEXO[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:30:12 [32mMessage[39m from [32m51966653383[39m in [32mWA BOT LATAM[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:30:23 [32mMessage[39m from [32m573136332436[39m in [32mTP Resurrection | Oficial[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;32mEXEC[1;37m] 23/03 23:30:24 [32msticker[39m from [32m595994588776[39m in [32mTP Resurrection | Oficial[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:30:24 [32mMessage[39m from [32m34641244977[39m in [32mKAISER SEXO[39m args : [32m0[39m
+Started : ffmpeg -i ./undefined.jpeg -i undefined.jpeg -y -vcodec libwebp -vf scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse -f webp 3403.webp
+Finish
+Error : null
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:30:25 [32mMessage[39m from [32m573136332436[39m in [32mTP Resurrection | Oficial[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:30:41 [32mMessage[39m from [32m5491144340436[39m in [32mKAISER SEXO[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:30:44 [32mMessage[39m from [32m573136332436[39m in [32mTP Resurrection | Oficial[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:30:45 [32mMessage[39m from [32m573136332436[39m in [32mTP Resurrection | Oficial[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:30:56 [32mMessage[39m from [32m5219614583342[39m in [32mWA BOT LATAM[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:30:59 [32mMessage[39m from [32m5212212121212[39m in [32mWA BOT LATAM[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:30:59 [32mMessage[39m from [32m51925745443[39m in [32mKAISER SEXO[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;32mEXEC[1;37m] 23/03 23:31:01 [32msticker[39m from [32m595994588776[39m in [32mTP Resurrection | Oficial[39m args : [32m0[39m
+Started : ffmpeg -i ./undefined.jpeg -i undefined.jpeg -y -vcodec libwebp -vf scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse -f webp 301.webp
+Finish
+Error : null
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:31:11 [32mMessage[39m from [32m595994588776[39m in [32mTP Resurrection | Oficial[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:31:11 [32mMessage[39m from [32m51966653383[39m in [32mWA BOT LATAM[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:31:13 [32mMessage[39m from [32m5212212121212[39m in [32mWA BOT LATAM[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:31:15 [32mMessage[39m from [32m5491144340436[39m in [32mKAISER SEXO[39m args : [32m0[39m
+[1;31m~[1;37m> [[1;31mRECV[1;37m] 23/03 23:31:23 [32mMessage[39m from [32m51925745443[39m in [32mKAISER SEXO[39m args : [32m0[39m
+[32mINFO[39m [2021-03-23 16:31:23.734 +0000] (26734): [36mclosed connection, reason replaced[39m
+    class: "Baileys"
+^C[?25h^C[?25h
